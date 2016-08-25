@@ -1,0 +1,19 @@
+//Because of the gulp-sass's bug, when defined the variables about the color(same to '#' or 'rgba()'), it will throw an error.
+//So, we use the @mixin instead of it.
+//***********************************************************************************
+//background variables
+
+@mixin body-bg{
+    background: #dfdfdf;
+}
+@mixin body-color{
+    color: #333;
+}
+
+@mixin primary-bg {
+    background: #06c1ae;
+}
+
+@mixin primary-color {
+    background: #06c1ae;
+}
