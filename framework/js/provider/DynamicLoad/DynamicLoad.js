@@ -13,14 +13,8 @@
     }
     // Pass this if window is not defined yet
 }(typeof window !== "undefined" ? window : this, function (window, noGlobal) {
-
-    var dy = angular.module('ng-dynamicLoad',[]);
-    dy.provider('DynamicLoad', function(){
-        this.$get = ['$http', '$q', '$document', '$compile', '$rootScope', 'dialog', 'LoginService', 'HttpSetProvider', 'SystemConfig', 'Cookie', function ($http, $q, $document, $compile, $rootScope, dialog, LoginService, HttpSetProvider, SystemConfig, Cookie) {
-
-        }];
-        console.log(this.$get);
-    });
+    //var m = angular.module('ngInject',[]);
+    //app.requires.push('ngInject');
 
     var DynamicLoad = {
         includeJs: _includeJs,
@@ -41,9 +35,9 @@
             if (!(typeof callArray === 'object' || typeof callArray.length === 'number')) {
                 throw error('The second argument must be the  array');
             }
-            var injectParam = callArray.slice(0,callArray.length-1);
+            var injectParam = callArray.slice(0, callArray.length - 1);
             var callback = callArray[callArray.length - 1];
-            if(!(typeof callback === 'function')){
+            if (!(typeof callback === 'function')) {
                 throw error('The second argument must be the array. And in the array, the last must be the callback');
             }
 
@@ -61,7 +55,26 @@
             var readyInterval = setInterval(function () {
                 if (DynamicLoad.jsReadyCount === 0 && DynamicLoad.cssReadyCount === 0) {
                     clearInterval(readyInterval);
-                    return callback();
+                    //var baseInject = angular.injector(['ngDialog']);
+                    app.requires.push('ngDialog');
+                    app.factory('abc',[function(){
+                        return {
+                            a:function(){
+
+                            }
+                        }
+                    }]);
+                    app.directive('cde',[function(){
+
+                    }]);
+                    // app.service('$initLoad',[function(){
+                    //     //var temp = $inject.get('dialog');
+                    //     console.log('service');
+                    // }]);
+                    var myInject = angular.injector(['myzd-app']);
+                    console.log(myInject.get('abc'));
+                    console.log(myInject);
+                    callback();
                 }
             }, 500);
 

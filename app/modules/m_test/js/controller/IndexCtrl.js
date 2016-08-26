@@ -1,12 +1,20 @@
-app.controller('IndexCtrl', ['$scope', function ($scope) {
+app.controller('IndexCtrl', ['$scope','$compile', function ($scope,$compile) {
     $scope.hello = 'This is the index html.';
+    // console.log('thisCtrl',IndexCtrl);
+    // console.log('thisCtrl',IndexCtrl.provider());
+    // console.log($ngInject.DynamicLoad);
     // DynamicLoad.ready();
-    DynamicLoad.includeComponents(['iScroll', ['dialog', false]]);
-    DynamicLoad.ready({
-        components: ['iScroll', ['dialog', false]]
-    }, ['dialog',function (dialog) {
-        console.log(1);
-    }]);
+    //$ngInject.test();
+    // DynamicLoad.includeComponents(['iScroll', ['dialog', false]]);
+
+
+    // DynamicLoad.ready({
+    //     components: ['iScroll', ['dialog', false],['helper',false]]
+    // }, ['dialog','helper',function (dialog,helper) {
+    //     console.log(1111);
+    // }]);
+
+
     // DynamicLoad.includeComponents(['dialog']);
     // DynamicLoad.includeJs(['components/dialog.js'], function(){
     //     console.log(IScroll.utils);

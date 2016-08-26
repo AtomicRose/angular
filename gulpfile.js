@@ -4,7 +4,7 @@
  *  Here is the app build config
  */
 var THEME_NAME = 'default';
-var COMPONENTS_LIST = ['dialog', 'iScroll'];
+var COMPONENTS_LIST = ['dialog', 'iScroll','helper','filter'];
 
 /**************************************/
 
@@ -22,6 +22,7 @@ var frameworkPaths = {
     jsPath: [
         'framework/js/lib/angular.js',
         'framework/js/lib/angular-ui-router.js',
+        'framework/js/baseApp.js',
         'framework/js/provider/**/*.js'
     ],
     sassPath: [

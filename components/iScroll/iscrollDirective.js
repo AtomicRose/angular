@@ -1,5 +1,6 @@
 app.directive('scrollWidget', [function () {
     var ctrl = ['$scope', function ($scope) {
+        console.log('begin iscroll');
         $scope.defaults = {
             topLoadingTip: '刷新',
             bottomLoadingTip: '加载中'
