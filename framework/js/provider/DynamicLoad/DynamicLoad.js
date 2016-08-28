@@ -35,8 +35,11 @@
             if (!(typeof callArray === 'object' || typeof callArray.length === 'number')) {
                 throw error('The second argument must be the  array');
             }
-            var injectParam = callArray.slice(0, callArray.length - 1);
+            var injectParam;
             var callback = callArray[callArray.length - 1];
+            if(callArray.length >1){
+                injectParam = callArray.slice(0, callArray.length - 1);
+            }
             if (!(typeof callback === 'function')) {
                 throw error('The second argument must be the array. And in the array, the last must be the callback');
             }
@@ -55,26 +58,31 @@
             var readyInterval = setInterval(function () {
                 if (DynamicLoad.jsReadyCount === 0 && DynamicLoad.cssReadyCount === 0) {
                     clearInterval(readyInterval);
-                    //var baseInject = angular.injector(['ngDialog']);
-                    app.requires.push('ngDialog');
-                    app.factory('abc',[function(){
-                        return {
-                            a:function(){
-
+                    if(dynamicObj.modules && dynamicObj.modules.length){
+                        for(var i= 0, len = dynamicObj.modules.length; i<len; i++){
+                            if(!app.requires.hasOwnProperty(dynamicObj.modules[i])){
+                                app.requires.push(dynamicObj.modules[i]);
                             }
                         }
-                    }]);
-                    app.directive('cde',[function(){
-
-                    }]);
+                    }
+                    //var baseInject = angular.injector(['ngDialog']);
+                    //app.requires.push('ngDialog');
                     // app.service('$initLoad',[function(){
                     //     //var temp = $inject.get('dialog');
                     //     console.log('service');
                     // }]);
                     var myInject = angular.injector(['myzd-app']);
-                    console.log(myInject.get('abc'));
-                    console.log(myInject);
-                    callback();
+                    console.log(angular);
+                    //console.log(myInject.get('abc'));
+                    //console.log(myInject);
+                    var argParam = [];
+                    if(injectParam){
+                        for(var j= 0, le = injectParam.length; j<le; j++){
+                            argParam.push(myInject.get(injectParam[j]));
+                        }
+                    }
+                    console.log(myInject.get('$injector'));
+                    callback.apply(this, argParam);
                 }
             }, 500);
 

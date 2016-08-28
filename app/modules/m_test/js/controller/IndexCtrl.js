@@ -1,4 +1,4 @@
-app.controller('IndexCtrl', ['$scope','$compile', function ($scope,$compile) {
+angular.module('myzd-app').controller('IndexCtrl', ['$scope','$compile', function ($scope,$compile) {
     $scope.hello = 'This is the index html.';
     // console.log('thisCtrl',IndexCtrl);
     // console.log('thisCtrl',IndexCtrl.provider());
@@ -8,11 +8,15 @@ app.controller('IndexCtrl', ['$scope','$compile', function ($scope,$compile) {
     // DynamicLoad.includeComponents(['iScroll', ['dialog', false]]);
 
 
-    // DynamicLoad.ready({
-    //     components: ['iScroll', ['dialog', false],['helper',false]]
-    // }, ['dialog','helper',function (dialog,helper) {
-    //     console.log(1111);
-    // }]);
+     DynamicLoad.ready({
+         components: ['iScroll', ['dialog', false],['helper',false]],
+         jsFiles:[],
+         cssFiles:[],
+         modules:['ngDialog']
+     }, ['dialog','helper',function (dialog,helper) {
+         console.log(dialog);
+         console.log(helper);
+     }]);
 
 
     // DynamicLoad.includeComponents(['dialog']);
