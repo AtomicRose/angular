@@ -10,6 +10,5 @@ angular.module('myzd-app').controller('IndexCtrl', ['$scope', function ($scope) 
             console.log(dialog);
             console.log(helper);
             console.log(app);
-
         }]);
 }]);
