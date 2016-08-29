@@ -25,6 +25,7 @@
         cssReadyCount: 0,
         ready: _readyCall
     };
+
     function _readyCall() {
         if (arguments && arguments.length) {
             var dynamicObj = arguments[0];
@@ -37,7 +38,7 @@
             }
             var injectParam;
             var callback = callArray[callArray.length - 1];
-            if(callArray.length >1){
+            if (callArray.length > 1) {
                 injectParam = callArray.slice(0, callArray.length - 1);
             }
             if (!(typeof callback === 'function')) {
@@ -58,31 +59,21 @@
             var readyInterval = setInterval(function () {
                 if (DynamicLoad.jsReadyCount === 0 && DynamicLoad.cssReadyCount === 0) {
                     clearInterval(readyInterval);
-                    if(dynamicObj.modules && dynamicObj.modules.length){
-                        for(var i= 0, len = dynamicObj.modules.length; i<len; i++){
-                            if(!app.requires.hasOwnProperty(dynamicObj.modules[i])){
+                    if (dynamicObj.modules && dynamicObj.modules.length) {
+                        for (var i = 0, len = dynamicObj.modules.length; i < len; i++) {
+                            if (!app.requires.hasOwnProperty(dynamicObj.modules[i])) {
                                 app.requires.push(dynamicObj.modules[i]);
                             }
                         }
                     }
-                    //var baseInject = angular.injector(['ngDialog']);
-                    //app.requires.push('ngDialog');
-                    // app.service('$initLoad',[function(){
-                    //     //var temp = $inject.get('dialog');
-                    //     console.log('service');
-                    // }]);
                     var myInject = angular.injector(['myzd-app']);
-                    console.log(angular);
-                    //console.log(myInject.get('abc'));
-                    //console.log(myInject);
                     var argParam = [];
-                    if(injectParam){
-                        for(var j= 0, le = injectParam.length; j<le; j++){
+                    if (injectParam) {
+                        for (var j = 0, le = injectParam.length; j < le; j++) {
                             argParam.push(myInject.get(injectParam[j]));
                         }
                     }
-                    console.log(myInject.get('$injector'));
-                    callback.apply(this, argParam);
+                    return callback.apply(this, argParam);
                 }
             }, 500);
 
@@ -168,15 +159,15 @@
             var temp = componentsArray[i];
 
             if (typeof temp === 'string') {
-                jsArray.push('components/' + temp + '.js');
-                cssArray.push('components/' + temp + '.css');
+                jsArray.push('components/provider/' + temp + '/' + temp + '.js');
+                cssArray.push('components/provider/' + temp + '/' + temp + '.css');
             }
             if (typeof temp === 'object' && typeof  temp.length === 'number') {
                 if (temp.length === 2 && temp[1] === false) {
-                    jsArray.push('components/' + temp[0] + '.js');
+                    jsArray.push('components/provider/' + temp[0] + '/' + temp[0] + '.js');
                 } else {
-                    jsArray.push('components/' + temp[0] + '.js');
-                    cssArray.push('components/' + temp[0] + '.css');
+                    jsArray.push('components/provider/' + temp[0] + '/' + temp[0] + '.js');
+                    cssArray.push('components/provider/' + temp[0] + '/' + temp[0] + '.css');
                 }
             }
         }

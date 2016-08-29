@@ -4,7 +4,7 @@
  *  Here is the app build config
  */
 var THEME_NAME = 'default';
-var COMPONENTS_LIST = ['dialog', 'iScroll','helper','filter'];
+var COMPONENTS_LIST = ['dialog', 'iScroll','helper'];
 
 /**************************************/
 
@@ -22,6 +22,7 @@ var frameworkPaths = {
     jsPath: [
         'framework/js/lib/angular.js',
         'framework/js/lib/angular-ui-router.js',
+        'framework/js/lib/ocLazyLoad.js',
         'framework/js/baseApp.js',
         'framework/js/provider/**/*.js'
     ],
@@ -31,9 +32,12 @@ var frameworkPaths = {
 };
 
 var componentsPaths = {
-    componentsJsPath: [],
-    modulesJsPath: ['components/**/*.js'],
-    sassPath: ['components/**/*.scss']
+    directiveJsPath: ['components/directive/**/*.js'],
+    directiveSassPath: ['components/directive/**/*.scss'],
+    filterJsPath: ['components/filter/**/*.js'],
+    filterSassPath: ['components/filter/**/*.scss'],
+    providerJsPath: ['components/provider/**/*.js'],
+    providerSassPath: ['components/provider/**/*.scss']
 };
 
 var appPaths = {
@@ -93,37 +97,67 @@ gulp.task('framework-js-debug', function () {
         .pipe(gulp.dest('dist/framework/'));
 });
 /**
- * 构建component-js
+ * 构建component-provider-js
  */
-gulp.task('components', function () {
+gulp.task('components-provider', function () {
     for (var i = 0, length = COMPONENTS_LIST.length; i < length; i++) {
-        gulp.src('components/' + COMPONENTS_LIST[i] + '/**/*.js')
+        gulp.src('components/provider/' + COMPONENTS_LIST[i] + '/**/*.js')
             .pipe(concat(COMPONENTS_LIST[i] + '.js'))
             .pipe(uglify())
-            .pipe(gulp.dest('dist/components/'));
-        gulp.src('components/' + COMPONENTS_LIST[i] + '/'+COMPONENTS_LIST[i]+'.scss')
+            .pipe(gulp.dest('dist/components/provider/'+COMPONENTS_LIST[i]+'/'));
+        gulp.src('components/provider/' + COMPONENTS_LIST[i] + '/'+COMPONENTS_LIST[i]+'.scss')
             .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-            .pipe(gulp.dest('dist/components/'));
+            .pipe(gulp.dest('dist/components/provider/'+COMPONENTS_LIST[i]+'/'));
     }
     return true;
 });
-gulp.task('components-debug', function () {
+gulp.task('components-provider-debug', function () {
     for (var i = 0, length = COMPONENTS_LIST.length; i < length; i++) {
-        gulp.src('components/' + COMPONENTS_LIST[i] + '/**/*.js')
+        gulp.src('components/provider/' + COMPONENTS_LIST[i] + '/**/*.js')
             .pipe(sourcemaps.init())
             .pipe(concat(COMPONENTS_LIST[i] + '.js'))
             .pipe(uglify())
             .pipe(sourcemaps.write())
-            .pipe(gulp.dest('dist/components/'));
-        gulp.src('components/' + COMPONENTS_LIST[i] + '/'+COMPONENTS_LIST[i]+'.scss')
+            .pipe(gulp.dest('dist/components/provider/'+COMPONENTS_LIST[i]+'/'));
+        gulp.src('components/provider/' + COMPONENTS_LIST[i] + '/'+COMPONENTS_LIST[i]+'.scss')
             .pipe(sourcemaps.init())
             .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
             .pipe(sourcemaps.write())
-            .pipe(gulp.dest('dist/components/'));
+            .pipe(gulp.dest('dist/components/provider/'+COMPONENTS_LIST[i]+'/'));
     }
     return true;
 });
-
+/**
+ * 构建components-directive-filter
+ */
+gulp.task('components-js', function(){
+    gulp.src(componentsPaths.directiveJsPath.concat(componentsPaths.filterJsPath))
+        .pipe(concat('components.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/components/'));
+});
+gulp.task('components-js-debug', function(){
+    gulp.src(componentsPaths.directiveJsPath.concat(componentsPaths.filterJsPath))
+        .pipe(sourcemaps.init())
+        .pipe(concat('components.js'))
+        .pipe(uglify())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('dist/components/'));
+});
+gulp.task('components-sass', function(){
+    gulp.src(componentsPaths.directiveSassPath.concat(componentsPaths.filterSassPath))
+        .pipe(concat('components.scss'))
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+        .pipe(gulp.dest('dist/components/'));
+});
+gulp.task('components-sass-debug', function(){
+    gulp.src(componentsPaths.directiveSassPath.concat(componentsPaths.filterSassPath))
+        .pipe(concat('components.scss'))
+        .pipe(sourcemaps.init())
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('dist/components/'));
+});
 /**
  * 构建app -js
  */
@@ -141,21 +175,7 @@ gulp.task('app-js-debug', function () {
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist/app/'));
 });
-// /**
-//  * 构建app-modules-js
-//  */
-// gulp.task('app-module-js', function(){
-//     return gulp.src(appPaths.modulesJsPath)
-//         .pipe(uglify())
-//         .pipe(gulp.dest('dist/app/'));
-// });
-// gulp.task('app-module-js-debug', function(){
-//     return gulp.src(appPaths.modulesJsPath)
-//         .pipe(sourcemaps.init())
-//         .pipe(uglify())
-//         .pipe(sourcemaps.write())
-//         .pipe(gulp.dest('dist/app/'));
-// });
+
 /**
  * 构建html
  */
@@ -168,9 +188,9 @@ gulp.task('html', function () {
 /**
  * 所有资源编译
  */
-gulp.task('sourceBuild', ['framework-sass', 'framework-js', 'app-js', 'components', 'html'], function () {
+gulp.task('sourceBuild', ['framework-sass', 'framework-js', 'app-js', 'components-provider', 'components-js', 'components-sass', 'html'], function () {
 });
-gulp.task('sourceBuild-debug', ['framework-sass-debug', 'framework-js-debug', 'app-js-debug', 'components-debug', 'html'], function () {
+gulp.task('sourceBuild-debug', ['framework-sass-debug', 'framework-js-debug', 'app-js-debug', 'components-provider-debug','components-js-debug', 'components-sass-debug', 'html'], function () {
 });
 gulp.task('build', ['clean'], function () {
     return gulp.start('sourceBuild');
