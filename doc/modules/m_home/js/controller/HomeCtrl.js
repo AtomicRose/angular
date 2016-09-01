@@ -1,6 +1,8 @@
-app.controller('MeCtrl',['$scope','$rootScope',function($scope,$rootScope){
+app.controller('HomeCtrl', ['$scope','$rootScope', function ($scope,$rootScope) {
     window.headerConfig={
-        enableHeader: false
+        enableHeader: true,
+        enableBack: false,
+        title: '说明文档'
     };
     window.footerConfig = {
         enableFooter: true

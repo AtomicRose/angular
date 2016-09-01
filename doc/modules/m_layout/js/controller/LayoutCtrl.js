@@ -2,32 +2,25 @@ app.controller('LayoutCtrl', ['$scope','$rootScope',function ($scope, $rootScope
     if(!window.headerConfig){
         window.headerConfig = {};
     }
-    if(!window.footerConfig){
-        window.footerConfig = {};
-    }
 
-    $scope.menuList =[
+   $scope.menuList=[
         {
-            text: '首页',
+            text: 'Home',
             class: 'icon-home',
-            route: 'layout.home'
+            route: 'doc.home'
         },
         {
-            text: '医院',
+            text: '样式',
             class: 'icon-hospital',
-            route: 'layout.hospital'
+            route: 'doc.style'
         },
         {
-            text: '发现',
+            text: '组件',
             class: 'icon-find',
-            route: 'layout.find'
-        },
-        {
-            text: '个人',
-            class: 'icon-me',
-            route: 'layout.me'
+            route: 'doc.widget'
         }
     ];
+
 
     $scope.orderListOptions = {
         //snap: 'li',

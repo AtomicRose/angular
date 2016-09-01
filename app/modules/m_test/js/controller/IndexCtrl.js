@@ -1,4 +1,4 @@
-angular.module('myzd-app').controller('IndexCtrl', ['$scope', function ($scope) {
+app.controller('IndexCtrl', ['$scope', function ($scope) {
     $scope.hello = 'This is the index html.';
 
         DynamicLoad.ready({

@@ -1,6 +1,8 @@
-app.controller('MeCtrl',['$scope','$rootScope',function($scope,$rootScope){
+app.controller('StyleCtrl', ['$scope','$rootScope', function ($scope,$rootScope) {
     window.headerConfig={
-        enableHeader: false
+        enableHeader: true,
+        enableBack: false,
+        title: '样式说明'
     };
     window.footerConfig = {
         enableFooter: true

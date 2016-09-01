@@ -4,7 +4,7 @@
  *  Here is the app build config
  */
 var THEME_NAME = 'default';
-var COMPONENTS_LIST = ['dialog', 'iScroll','helper'];
+var COMPONENTS_LIST = ['dialog', 'iScroll', 'helper'];
 
 /**************************************/
 
@@ -56,6 +56,14 @@ var viewPath = [
     'index.html'
 ];
 
+var docPath = {
+    docJsPath: ['doc/**/*.js'],
+    docSassPath: ['doc/doc.scss'],
+    viewPath: [
+        '{doc, config}/**/*.html', 'doc.html'
+    ]
+};
+
 /**
  * 清除当前目录
  */
@@ -105,10 +113,10 @@ gulp.task('components-provider', function () {
         gulp.src('components/provider/' + COMPONENTS_LIST[i] + '/**/*.js')
             .pipe(concat(COMPONENTS_LIST[i] + '.js'))
             .pipe(uglify())
-            .pipe(gulp.dest('dist/components/provider/'+COMPONENTS_LIST[i]+'/'));
-        gulp.src('components/provider/' + COMPONENTS_LIST[i] + '/'+COMPONENTS_LIST[i]+'.scss')
+            .pipe(gulp.dest('dist/components/provider/' + COMPONENTS_LIST[i] + '/'));
+        gulp.src('components/provider/' + COMPONENTS_LIST[i] + '/' + COMPONENTS_LIST[i] + '.scss')
             .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-            .pipe(gulp.dest('dist/components/provider/'+COMPONENTS_LIST[i]+'/'));
+            .pipe(gulp.dest('dist/components/provider/' + COMPONENTS_LIST[i] + '/'));
     }
     return true;
 });
@@ -119,25 +127,25 @@ gulp.task('components-provider-debug', function () {
             .pipe(concat(COMPONENTS_LIST[i] + '.js'))
             .pipe(uglify())
             .pipe(sourcemaps.write())
-            .pipe(gulp.dest('dist/components/provider/'+COMPONENTS_LIST[i]+'/'));
-        gulp.src('components/provider/' + COMPONENTS_LIST[i] + '/'+COMPONENTS_LIST[i]+'.scss')
+            .pipe(gulp.dest('dist/components/provider/' + COMPONENTS_LIST[i] + '/'));
+        gulp.src('components/provider/' + COMPONENTS_LIST[i] + '/' + COMPONENTS_LIST[i] + '.scss')
             .pipe(sourcemaps.init())
             .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
             .pipe(sourcemaps.write())
-            .pipe(gulp.dest('dist/components/provider/'+COMPONENTS_LIST[i]+'/'));
+            .pipe(gulp.dest('dist/components/provider/' + COMPONENTS_LIST[i] + '/'));
     }
     return true;
 });
 /**
  * 构建components-directive-filter
  */
-gulp.task('components-js', function(){
+gulp.task('components-js', function () {
     gulp.src(componentsPaths.directiveJsPath.concat(componentsPaths.filterJsPath.concat(componentsPaths.configJsPath)))
         .pipe(concat('components.js'))
         .pipe(uglify())
         .pipe(gulp.dest('dist/components/'));
 });
-gulp.task('components-js-debug', function(){
+gulp.task('components-js-debug', function () {
     gulp.src(componentsPaths.directiveJsPath.concat(componentsPaths.filterJsPath.concat(componentsPaths.configJsPath)))
         .pipe(sourcemaps.init())
         .pipe(concat('components.js'))
@@ -145,7 +153,7 @@ gulp.task('components-js-debug', function(){
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist/components/'));
 });
-gulp.task('components-sass', function(){
+gulp.task('components-sass', function () {
     //gulp.src(componentsPaths.directiveSassPath.concat(componentsPaths.filterSassPath))
     gulp.src('components/directive/components.scss')
         .pipe(template({THEME_NAME: THEME_NAME}))
@@ -153,7 +161,7 @@ gulp.task('components-sass', function(){
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(gulp.dest('dist/components/'));
 });
-gulp.task('components-sass-debug', function(){
+gulp.task('components-sass-debug', function () {
     //gulp.src(componentsPaths.directiveSassPath.concat(componentsPaths.filterSassPath))
     gulp.src('components/directive/components.scss')
         .pipe(template({THEME_NAME: THEME_NAME}))
@@ -183,13 +191,13 @@ gulp.task('app-js-debug', function () {
 /**
  * 构建app-sass
  */
-gulp.task('app-sass', function(){
+gulp.task('app-sass', function () {
     return gulp.src('app/app.scss')
         .pipe(template({THEME_NAME: THEME_NAME}))
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(gulp.dest('dist/app/'));
 });
-gulp.task('app-sass-debug', function(){
+gulp.task('app-sass-debug', function () {
     return gulp.src('app/app.scss')
         .pipe(template({THEME_NAME: THEME_NAME}))
         .pipe(sourcemaps.init())
@@ -206,13 +214,31 @@ gulp.task('html', function () {
         .pipe(template({THEME_NAME: THEME_NAME}))
         .pipe(gulp.dest('dist/'));
 });
-
+/**
+ * 编译doc
+ */
+gulp.task('doc-html', function () {
+    return gulp.src(docPath.viewPath)
+        .pipe(template({THEME_NAME: THEME_NAME}))
+        .pipe(gulp.dest('dist/'));
+});
+gulp.task('doc-js', function () {
+    return gulp.src(docPath.docJsPath)
+        .pipe(concat('doc.js'))
+        .pipe(gulp.dest('dist/doc/'));
+});
+gulp.task('doc-sass', function () {
+    return gulp.src(docPath.docSassPath)
+        .pipe(template({THEME_NAME: THEME_NAME}))
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('dist/doc/'));
+});
 /**
  * 所有资源编译
  */
 gulp.task('sourceBuild', ['framework-sass', 'framework-js', 'app-js', 'app-sass', 'components-provider', 'components-js', 'components-sass', 'html'], function () {
 });
-gulp.task('sourceBuild-debug', ['framework-sass-debug', 'framework-js-debug', 'app-js-debug', 'app-sass-debug', 'components-provider-debug','components-js-debug', 'components-sass-debug', 'html'], function () {
+gulp.task('sourceBuild-debug', ['framework-sass-debug', 'framework-js-debug', 'app-js-debug', 'app-sass-debug', 'components-provider-debug', 'components-js-debug', 'components-sass-debug', 'html', 'doc-html', 'doc-js', 'doc-sass'], function () {
 });
 gulp.task('build', ['clean'], function () {
     return gulp.start('sourceBuild');

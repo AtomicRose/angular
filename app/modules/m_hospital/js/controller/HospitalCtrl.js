@@ -3,5 +3,9 @@ app.controller('HospitalCtrl', ['$scope','$rootScope',function($scope,$rootScope
         enableHeader: true,
         title: '推荐'
     };
+    window.footerConfig = {
+        enableFooter: true
+    };
     $rootScope.$broadcast('setHeaderConfig', window.headerConfig);
+    $rootScope.$broadcast('setFooterConfig', window.footerConfig);
 }]);

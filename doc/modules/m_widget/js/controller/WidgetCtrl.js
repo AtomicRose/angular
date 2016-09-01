@@ -1,6 +1,8 @@
-app.controller('MeCtrl',['$scope','$rootScope',function($scope,$rootScope){
+app.controller('WidgetCtrl', ['$scope','$rootScope', function ($scope,$rootScope) {
     window.headerConfig={
-        enableHeader: false
+        enableHeader: true,
+        enableBack: false,
+        title: '组件说明'
     };
     window.footerConfig = {
         enableFooter: true
