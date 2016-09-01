@@ -32,6 +32,7 @@ var frameworkPaths = {
 };
 
 var componentsPaths = {
+    configJsPath: ['config/**/*.js'],
     directiveJsPath: ['components/directive/**/*.js'],
     directiveSassPath: ['components/directive/**/*.scss'],
     filterJsPath: ['components/filter/**/*.js'],
@@ -131,13 +132,13 @@ gulp.task('components-provider-debug', function () {
  * 构建components-directive-filter
  */
 gulp.task('components-js', function(){
-    gulp.src(componentsPaths.directiveJsPath.concat(componentsPaths.filterJsPath))
+    gulp.src(componentsPaths.directiveJsPath.concat(componentsPaths.filterJsPath.concat(componentsPaths.configJsPath)))
         .pipe(concat('components.js'))
         .pipe(uglify())
         .pipe(gulp.dest('dist/components/'));
 });
 gulp.task('components-js-debug', function(){
-    gulp.src(componentsPaths.directiveJsPath.concat(componentsPaths.filterJsPath))
+    gulp.src(componentsPaths.directiveJsPath.concat(componentsPaths.filterJsPath.concat(componentsPaths.configJsPath)))
         .pipe(sourcemaps.init())
         .pipe(concat('components.js'))
         .pipe(uglify())
@@ -145,13 +146,17 @@ gulp.task('components-js-debug', function(){
         .pipe(gulp.dest('dist/components/'));
 });
 gulp.task('components-sass', function(){
-    gulp.src(componentsPaths.directiveSassPath.concat(componentsPaths.filterSassPath))
+    //gulp.src(componentsPaths.directiveSassPath.concat(componentsPaths.filterSassPath))
+    gulp.src('components/directive/components.scss')
+        .pipe(template({THEME_NAME: THEME_NAME}))
         .pipe(concat('components.scss'))
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(gulp.dest('dist/components/'));
 });
 gulp.task('components-sass-debug', function(){
-    gulp.src(componentsPaths.directiveSassPath.concat(componentsPaths.filterSassPath))
+    //gulp.src(componentsPaths.directiveSassPath.concat(componentsPaths.filterSassPath))
+    gulp.src('components/directive/components.scss')
+        .pipe(template({THEME_NAME: THEME_NAME}))
         .pipe(concat('components.scss'))
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
@@ -175,6 +180,23 @@ gulp.task('app-js-debug', function () {
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist/app/'));
 });
+/**
+ * 构建app-sass
+ */
+gulp.task('app-sass', function(){
+    return gulp.src('app/app.scss')
+        .pipe(template({THEME_NAME: THEME_NAME}))
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+        .pipe(gulp.dest('dist/app/'));
+});
+gulp.task('app-sass-debug', function(){
+    return gulp.src('app/app.scss')
+        .pipe(template({THEME_NAME: THEME_NAME}))
+        .pipe(sourcemaps.init())
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('dist/app/'));
+});
 
 /**
  * 构建html
@@ -188,9 +210,9 @@ gulp.task('html', function () {
 /**
  * 所有资源编译
  */
-gulp.task('sourceBuild', ['framework-sass', 'framework-js', 'app-js', 'components-provider', 'components-js', 'components-sass', 'html'], function () {
+gulp.task('sourceBuild', ['framework-sass', 'framework-js', 'app-js', 'app-sass', 'components-provider', 'components-js', 'components-sass', 'html'], function () {
 });
-gulp.task('sourceBuild-debug', ['framework-sass-debug', 'framework-js-debug', 'app-js-debug', 'components-provider-debug','components-js-debug', 'components-sass-debug', 'html'], function () {
+gulp.task('sourceBuild-debug', ['framework-sass-debug', 'framework-js-debug', 'app-js-debug', 'app-sass-debug', 'components-provider-debug','components-js-debug', 'components-sass-debug', 'html'], function () {
 });
 gulp.task('build', ['clean'], function () {
     return gulp.start('sourceBuild');

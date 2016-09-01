@@ -1,7 +1,10 @@
-<div ng-controller="LayoutCtrl">
-    <header>This is header</header>
-    <div scroll-widget>
-        <div ng-view></div>
+<div ng-controller="LayoutCtrl" class="layout-base">
+    <div header-widget></div>
+
+    <div class="layout-content" id="layoutContent">
+        <div ui-view></div>
     </div>
-    <footer>This is footer</footer>
+    <footer class="layout-footer" id="layoutFooter">
+        <div footer-widget></div>
+    </footer>
 </div>

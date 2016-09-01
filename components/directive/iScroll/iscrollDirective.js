@@ -26,7 +26,8 @@ app.directive('scrollWidget', [function () {
             }, 500);
 
             function main() {
-                var defaults = angular.extend(scope.defaults, scope.options);
+
+                var defaults = scope.defaults;
                 var e_scroll = document.getElementById(scope.id);
                 var thisScroll;
 
