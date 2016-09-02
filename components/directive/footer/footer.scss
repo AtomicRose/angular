@@ -57,7 +57,7 @@
         }
         .text{
             color: #999;
-            font-size: map_get($map-font-size, s);
+            font-size: px2rem(map_get($map-font-size, s));
             &.active{
                 color: $color-primary;
             }
