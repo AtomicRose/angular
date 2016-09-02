@@ -7,7 +7,7 @@
     -webkit-box-direction: normal;
     flex-direction: row;
     border-top: 1px solid $color-border-default;
-    padding-top: px2rem(4px);
+    padding-top: px2rem(2px);
     .item{
         -webkit-box-flex: 1;
         -webkit-flex: 1;
@@ -15,16 +15,16 @@
         height: 100%;
         text-align: center;
         .icon{
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             margin: 0 auto;
             overflow: hidden;
             display: block;
         }
         .icon-home{
             background: url("http://static.mingyizhudao.com/146278206712060") no-repeat;
-            background-size: 101px 51px;
-            background-position: -2px -25px;
+            background-size: 94px 44px;
+            background-position: -2px -22px;
             &.active{
                 background-position: -2px 0;
             }
@@ -32,27 +32,27 @@
         }
         .icon-hospital{
             background: url("http://static.mingyizhudao.com/146278206712060") no-repeat;
-            background-size: 101px 51px;
-            background-position: -26px -25px;
+            background-size: 94px 44px;
+            background-position: -24px -22px;
             &.active{
-                background-position: -26px 0;
+                background-position: -24px 0;
             }
         }
         .icon-find{
             background: url("http://static.mingyizhudao.com/146278206712060") no-repeat;
-            background-size: 101px 51px;
-            background-position: -50px -25px;
+            background-size: 94px 44px;
+            background-position: -47px -22px;
             &.active{
-                background-position: -50px 0;
+                background-position: -47px 0;
             }
 
         }
         .icon-me{
             background: url("http://static.mingyizhudao.com/146278206712060") no-repeat;
-            background-size: 101px 51px;
-            background-position: -74px -25px;
+            background-size: 94px 44px;
+            background-position: -70px -22px;
             &.active{
-                background-position: -74px 0;
+                background-position: -70px 0;
             }
         }
         .text{
