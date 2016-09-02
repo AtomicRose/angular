@@ -16,6 +16,8 @@
         -webkit-flex: 1;
         flex: 1;
         width: 100%;
+        overflow-x: hidden;
+        overflow-y: scroll;
     }
     .layout-footer{
         width: 100%;

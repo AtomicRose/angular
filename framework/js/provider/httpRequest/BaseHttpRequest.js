@@ -1,4 +1,4 @@
-app.factory('BaseHttpRequest', ['$http', '$q', function ($http, $q) {
+app.factory('BaseHttpRequest', ['$http', '$q','dialog', function ($http, $q,dialog) {
 
     var httpRequest = {};
     var defaults = {
@@ -10,15 +10,69 @@ app.factory('BaseHttpRequest', ['$http', '$q', function ($http, $q) {
             method: 'GET'
         };
         var obj = angular.extend(defaults, angular.extend(config, requestObj));
-        return _responseDto($http(obj));
+        return _responseDto($http(obj), dataDto);
     };
-    function _responseDto(httpPromise){
+    httpRequest.post = function(requestObj, dataDto){
+        var config = {
+            method: 'POST'
+        };
+        var obj = angular.extend(defaults, angular.extend(config, requestObj));
+        return _responseDto($http(obj), dataDto);
+    };
+    httpRequest.delete = function(requestObj, dataDto){
+        var config = {
+            method: 'DELETE'
+        };
+        var obj = angular.extend(defaults, angular.extend(config, requestObj));
+        return _responseDto($http(obj), dataDto);
+    };
+    httpRequest.jsonp = function(requestObj, dataDto){
+        var config = {
+            method: 'JSONP'
+        };
+        var obj = angular.extend(defaults, angular.extend(config, requestObj));
+        return _responseDto($http(obj), dataDto);
+    };
+    httpRequest.put = function(requestObj, dataDto){
+        var config = {
+            method: 'PUT'
+        };
+        var obj = angular.extend(defaults, angular.extend(config, requestObj));
+        return _responseDto($http(obj), dataDto);
+    };
+    function _baseReturn(res){
+        return res;
+    }
+    function _responseDto(httpPromise, dataDto){
         var promise = httpPromise;
+        var deferred = $q.defer();
+        var _successFn,_errorFn;
+        if(typeof dataDto === 'function'){
+            _successFn = dataDto;
+            _errorFn = dataDto
+        }else{
+            if(typeof dataDto === 'object'){
+                _successFn = dataDto.hasOwnProperty('successFn')?dataDto.successFn:_baseReturn;
+                _errorFn = dataDto.hasOwnProperty('errorFn')?dataDto.errorFn:_baseReturn;
+            }else{
+                _successFn = _baseReturn;
+                _errorFn = _baseReturn;
+            }
+        }
         promise.success(function(data,status,headers,config){
-            console.log('success');
+            if(status === 200){
+                if(data.status === 'ok'){
+                    deferred.resolve(_successFn(data));
+                }else{
+                    deferred.reject(_errorFn(data));
+                }
+            }else{
+                dialog.alert(status+':服务器错误，请重试');
+            }
         }).error(function(data,status,headers,config){
-            console.log('error');
+            dialog.alert(status+':服务器错误，请重试');
         });
+        return deferred.promise;
     }
     return httpRequest;
 }]);

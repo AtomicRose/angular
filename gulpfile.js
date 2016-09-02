@@ -4,7 +4,7 @@
  *  Here is the app build config
  */
 var THEME_NAME = 'default';
-var COMPONENTS_LIST = ['dialog', 'iScroll', 'helper'];
+var COMPONENTS_LIST = ['dialog'];
 
 /**************************************/
 

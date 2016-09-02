@@ -1,4 +1,4 @@
-app.controller('HomeCtrl', ['$scope','$rootScope','BaseHttpRequest','dialog', function ($scope,$rootScope,BaseHttpRequest,dialog) {
+app.controller('HomeCtrl', ['$scope','$rootScope','dialog','HomeService', function ($scope,$rootScope,dialog,HomeService) {
     window.headerConfig={
         enableHeader: true,
         enableBack: false,
@@ -10,12 +10,16 @@ app.controller('HomeCtrl', ['$scope','$rootScope','BaseHttpRequest','dialog', fu
     $rootScope.$broadcast('setHeaderConfig', window.headerConfig);
     $rootScope.$broadcast('setFooterConfig', window.footerConfig);
 
-    BaseHttpRequest.get({
-        url: 'http://m.mingyizhudao.com/api/hospital',
-        params: {
-            api: 6,
-            city: 0,
-            getcount:1
-        }
+    var params = {
+        api: 7,
+        disease_sub_category: 109,
+        page: 1,
+        getcount: 1
+    };
+    HomeService.test(params).then(function(res){
+        console.log(res);
+    },function(res){
+        dialog.alert(res.errorCode + ':'+res.errorMsg);
     });
+
 }]);
