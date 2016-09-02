@@ -1,4 +1,4 @@
-app.controller('MeCtrl',['$scope','$rootScope',function($scope,$rootScope){
+app.controller('MeCtrl',['$scope','$rootScope','StorageConfig','$state',function($scope,$rootScope,StorageConfig,$state){
     window.headerConfig={
         enableHeader: false
     };

@@ -26,4 +26,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
             url: '/me',
             templateUrl: 'app/modules/m_me/view/index.html'
         })
+        .state('layout.login', {
+            url: '/login',
+            templateUrl: 'app/modules/m_login/view/login.html'
+        })
+        .state('layout.register', {
+            url: '/register',
+            templateUrl: 'app/modules/m_register/view/register.html'
+        })
 }]);

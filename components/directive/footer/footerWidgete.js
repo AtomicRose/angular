@@ -1,20 +1,44 @@
-app.directive('footerWidget',function(){
-    var ctrl = ['$scope', '$rootScope', 'StorageConfig', '$state','helper', function ($scope, $rootScope, StorageConfig, $state,helper) {
+app.directive('footerWidget', function () {
+    var ctrl = ['$scope', '$rootScope', 'StorageConfig', '$state', 'helper', 'CMSDataConfig', function ($scope, $rootScope, StorageConfig, $state, helper, CMSDataConfig) {
         var defaults = {
-            enableFooter:false
+            enableFooter: false
         };
         $scope.defaults = angular.extend(defaults, window.footerConfig);
         $rootScope.$on('setFooterConfig', function (event, data) {
-            $scope.defaults = angular.extend(defaults, data);
+            var temp = angular.copy(defaults);
+            $scope.defaults = angular.extend(temp, data);
+        });
+
+        $rootScope.$on('$locationChangeSuccess',function(){
+            var currentHash = window.location.hash;
+            var menuList = CMSDataConfig.appMenus;
+            for (var i = menuList.length - 1; i >= 0; i--) {
+                if (currentHash.split('#')[1] === menuList[i].url) {
+                    $scope.selectedIndex = i;
+                    StorageConfig.FOOTER_STORAGE.putItem('selectedItemIndex', i);
+                    return true;
+                }
+            }
         });
         $scope.selectedIndex = StorageConfig.FOOTER_STORAGE.getItem('selectedItemIndex') || 0;
-        $scope.selectItem = function(item, index){
-            if($scope.selectedIndex != index){
-                $scope.selectedIndex = index;
-                StorageConfig.FOOTER_STORAGE.putItem('selectedItemIndex', index);
-                if(item.route){
-                    $state.go(item.route);
+        $scope.selectItem = function (item, index) {
+            if ($scope.selectedIndex != index) {
+                if (item.beforeCall && typeof item.beforeCall === 'function') {
+                    if (item.beforeCall()) {
+                        $scope.selectedIndex = index;
+                        StorageConfig.FOOTER_STORAGE.putItem('selectedItemIndex', index);
+                        if (item.route) {
+                            $state.go(item.route);
+                        }
+                    }
+                } else {
+                    $scope.selectedIndex = index;
+                    StorageConfig.FOOTER_STORAGE.putItem('selectedItemIndex', index);
+                    if (item.route) {
+                        $state.go(item.route);
+                    }
                 }
+
             }
         };
     }];

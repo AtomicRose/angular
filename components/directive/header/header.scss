@@ -19,6 +19,7 @@
         -webkit-box-flex: 1;
         -webkit-flex: 1;
         flex: 1;
+        padding: 0 px2rem(10px) 0 px2rem(10px);
         height: 100%;
         text-align: center;
         line-height: $header-height;
@@ -53,5 +54,13 @@
         background: url("http://static.mingyizhudao.com/146975853464574") center center no-repeat;
         -webkit-background-size:60%;
         background-size: 60%;
+    }
+    .other-right-operate{
+        height: 100%;
+        line-height:$header-height;
+        color: $header-color;
+        font-size: px2rem(map_get($map-font-size, s));
+        text-align: right;
+        padding-right: px2rem(10px);
     }
 }

@@ -8,9 +8,14 @@ app.directive('headerWidget', [function () {
             enableRefresh: true,
             enableArea: false,
             enableTab: false,
+            otherRightOperate: {
+                enable: false,
+                html: '',
+                clickCall: ''
+            },
             title: '名医主刀'
         };
-        $scope.defaults = angular.extend(defaults, window.headerConfig);
+        //$scope.defaults = angular.extend(defaults, window.headerConfig);
         /**
          * This is the $broadcast method for setting headerConfig. So you can use it in controller files like this:
          * -----------------------------------------------------
@@ -19,7 +24,8 @@ app.directive('headerWidget', [function () {
          * -----------------------------------------------------------
          */
         $rootScope.$on('setHeaderConfig', function (event, data) {
-            $scope.defaults = angular.extend(defaults, data);
+            var temp = angular.copy(defaults);
+            $scope.defaults = angular.extend(temp, data);
         });
 
         /**
@@ -80,8 +86,16 @@ app.directive('headerWidget', [function () {
         /**
          * Refresh the page
          */
-        $scope.refresh = function(){
+        $scope.refresh = function () {
             window.location.reload();
+        };
+        /**
+         * Click the other right operate fn
+         */
+        $scope.clickOtherRightOperate = function () {
+            if($scope.defaults.otherRightOperate.clickCall && typeof $scope.defaults.otherRightOperate.clickCall === 'function'){
+                $scope.defaults.otherRightOperate.clickCall();
+            }
         };
     }];
     return {
@@ -109,6 +123,7 @@ app.run(['$templateCache', function ($templateCache) {
        <div class="title" ng-bind="defaults.title"></div>\
        <div class="right-operate">\
            <div class="btn-refresh" ng-show="defaults.enableRefresh" ng-click="refresh()"></div>\
+           <div class="other-right-operate" ng-show="defaults.otherRightOperate.enable" ng-click="clickOtherRightOperate()" ng-bind-html="defaults.otherRightOperate.html | trustAsHtml"></div>\
        </div>\
        </div>\
        </header>');
