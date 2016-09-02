@@ -1,4 +1,4 @@
-app.controller('HomeCtrl', ['$scope','$rootScope', function ($scope,$rootScope) {
+app.controller('HomeCtrl', ['$scope','$rootScope','BaseHttpRequest','dialog', function ($scope,$rootScope,BaseHttpRequest,dialog) {
     window.headerConfig={
         enableHeader: true,
         enableBack: false,
@@ -9,4 +9,13 @@ app.controller('HomeCtrl', ['$scope','$rootScope', function ($scope,$rootScope) 
     };
     $rootScope.$broadcast('setHeaderConfig', window.headerConfig);
     $rootScope.$broadcast('setFooterConfig', window.footerConfig);
+
+    BaseHttpRequest.get({
+        url: 'http://m.mingyizhudao.com/api/hospital',
+        params: {
+            api: 6,
+            city: 0,
+            getcount:1
+        }
+    });
 }]);

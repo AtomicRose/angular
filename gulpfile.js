@@ -34,11 +34,9 @@ var frameworkPaths = {
 var componentsPaths = {
     configJsPath: ['config/**/*.js'],
     directiveJsPath: ['components/directive/**/*.js'],
-    directiveSassPath: ['components/directive/**/*.scss'],
     filterJsPath: ['components/filter/**/*.js'],
-    filterSassPath: ['components/filter/**/*.scss'],
     providerJsPath: ['components/provider/**/*.js'],
-    providerSassPath: ['components/provider/**/*.scss']
+    sassPath: ['components/components.scss']
 };
 
 var appPaths = {
@@ -137,16 +135,16 @@ gulp.task('components-provider-debug', function () {
     return true;
 });
 /**
- * 构建components-directive-filter
+ * 构建components-directive-filter-provider
  */
 gulp.task('components-js', function () {
-    gulp.src(componentsPaths.directiveJsPath.concat(componentsPaths.filterJsPath.concat(componentsPaths.configJsPath)))
+    gulp.src(componentsPaths.directiveJsPath.concat(componentsPaths.filterJsPath.concat(componentsPaths.configJsPath.concat(componentsPaths.providerJsPath))))
         .pipe(concat('components.js'))
         .pipe(uglify())
         .pipe(gulp.dest('dist/components/'));
 });
 gulp.task('components-js-debug', function () {
-    gulp.src(componentsPaths.directiveJsPath.concat(componentsPaths.filterJsPath.concat(componentsPaths.configJsPath)))
+    gulp.src(componentsPaths.directiveJsPath.concat(componentsPaths.filterJsPath.concat(componentsPaths.configJsPath.concat(componentsPaths.providerJsPath))))
         .pipe(sourcemaps.init())
         .pipe(concat('components.js'))
         .pipe(uglify())
@@ -155,7 +153,7 @@ gulp.task('components-js-debug', function () {
 });
 gulp.task('components-sass', function () {
     //gulp.src(componentsPaths.directiveSassPath.concat(componentsPaths.filterSassPath))
-    gulp.src('components/directive/components.scss')
+    gulp.src(componentsPaths.sassPath)
         .pipe(template({THEME_NAME: THEME_NAME}))
         .pipe(concat('components.scss'))
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
@@ -163,7 +161,7 @@ gulp.task('components-sass', function () {
 });
 gulp.task('components-sass-debug', function () {
     //gulp.src(componentsPaths.directiveSassPath.concat(componentsPaths.filterSassPath))
-    gulp.src('components/directive/components.scss')
+    gulp.src(componentsPaths.sassPath)
         .pipe(template({THEME_NAME: THEME_NAME}))
         .pipe(concat('components.scss'))
         .pipe(sourcemaps.init())
