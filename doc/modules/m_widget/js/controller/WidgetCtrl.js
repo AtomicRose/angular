@@ -1,4 +1,4 @@
-app.controller('WidgetCtrl', ['$scope','$rootScope', function ($scope,$rootScope) {
+app.controller('WidgetCtrl', ['$scope','$rootScope', '$state', function ($scope,$rootScope,$state) {
     window.headerConfig={
         enableHeader: true,
         enableBack: false,
@@ -9,4 +9,8 @@ app.controller('WidgetCtrl', ['$scope','$rootScope', function ($scope,$rootScope
     };
     $rootScope.$broadcast('setHeaderConfig', window.headerConfig);
     $rootScope.$broadcast('setFooterConfig', window.footerConfig);
+
+    $scope.goDialog = function() {
+        $state.go('doc.dialog');
+    }
 }]);
