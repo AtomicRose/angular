@@ -252,7 +252,8 @@ gulp.task('fileWatch', ['debug'], function () {
 });
 
 gulp.task('serve', function () {
-    gulp.start('build');
+    // gulp.start('build');
+    gulp.start('debug');
     connect.server({
         livereload: true,
         root: './dist',
