@@ -1,4 +1,7 @@
-$brand-info: #ddd;
+$brand-info: #999;
+$title-font-size: map-get($map-font-size, l);
+$base-font-size: map-get($map-font-size, m);
+
 .pop-mask{
     position: absolute;
     top: 0;
@@ -11,48 +14,50 @@ $brand-info: #ddd;
 .ng-dialog {
     /*toast*/
     .toast-body {
-        width: 360px;
+        $toast-body-width: 360px;
+        width: $toast-body-width;
         position: absolute;
         left: 50%;
         top: 50%;
-        margin-left: -180px;
+        margin-left: -$toast-body-width/2;
         z-index: 99999;
         .message {
             text-align: left;
             color: #fff;
-            font-size: px2rem(28px);
+            font-size: px2rem($base-font-size);
             background: #3a3a3a;
             opacity: .9;
             border-radius: px2rem(6px);
             margin: 0 auto;
             td {
-                padding: px2multi(20px, 30px, 20px, 30px);
+                padding: px2multi(10px, 20px, 10px, 20px);
             }
         }
     }
     /*confirm, alert*/
     .dialog-body {
-        width: px2rem(540px);
+        $dialog-body-width: 240px;
+        width: px2rem($dialog-body-width);
         position: absolute;
         top: 40%;
         left: 50%;
-        margin-left: px2rem(-270px);
+        margin-left: px2rem(-$dialog-body-width/2);
         background: #ffffff;
         z-index: 99999;
-        border-radius: px2rem(26px);
+        border-radius: px2rem(12px);
         overflow: hidden;
         font-weight: bold;
         .title {
             width: 100%;
-            font-size: px2rem(34px);
+            font-size: px2rem($title-font-size);
             color: #000;
             text-align: center;
-            padding: px2multi( 42px, 30px, 0px, 30px);
+            padding: px2rem(12px);
         }
         .contentHtml {
-            padding: px2multi(24px,30px,42px,30px);
+            padding: px2rem(12px);
             text-align: center;
-            font-size: px2rem(26px);
+            font-size: px2rem($base-font-size);
             color: #000;
             border-bottom: 1px solid #efefef;
         }
@@ -60,7 +65,7 @@ $brand-info: #ddd;
             text-align: center;
             button{
                 width: 100%;
-                font-size: px2rem(32px);
+                font-size: px2rem($base-font-size);
                 color: $brand-info;
             }
         }
@@ -71,7 +76,7 @@ $brand-info: #ddd;
                 float: left;
                 button{
                     width: 100%;
-                    font-size: px2rem(32px);
+                    font-size: px2rem($base-font-size);
                     color: $brand-info;
                 }
             }
@@ -86,12 +91,13 @@ $brand-info: #ddd;
     }
     /*spinner*/
     .spinner-body {
-        width: px2rem(140px);
-        height: px2rem(140px);
+        $spinner-body-width: 100px;
+        width: px2rem($spinner-body-width);
+        height: px2rem($spinner-body-width);
         position: absolute;
         top: 50%;
         left: 50%;
-        margin: px2multi(-70px, 0px, 0px, -70px);
+        margin: px2multi(-$spinner-body-width/2, 0px, 0px, -$spinner-body-width/2);
         background: #000000;
         border-radius: px2rem(8px);
         z-index: 99999;
