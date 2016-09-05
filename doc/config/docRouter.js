@@ -15,7 +15,10 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
             url: '/style',
             templateUrl: 'doc/modules/m_style/view/index.html'
         })
-        //widget
+        .state('doc.style-form', {
+            url: '/style/form',
+            templateUrl: 'doc/modules/m_style/view/form.html'
+        })
         .state('doc.widget', {
             url: '/widget',
             templateUrl: 'doc/modules/m_widget/view/index.html'

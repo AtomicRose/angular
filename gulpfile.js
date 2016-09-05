@@ -75,11 +75,13 @@ gulp.task('clean', function (callback) {
  */
 gulp.task('framework-sass', function () {
     return gulp.src(frameworkPaths.sassPath)
+        .pipe(template({THEME_NAME: THEME_NAME}))
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(gulp.dest('dist/framework/'));
 });
 gulp.task('framework-sass-debug', function () {
     return gulp.src(frameworkPaths.sassPath)
+        .pipe(template({THEME_NAME: THEME_NAME}))
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(sourcemaps.write())
@@ -252,7 +254,7 @@ gulp.task('fileWatch', ['debug'], function () {
 });
 
 gulp.task('serve', function () {
-    gulp.start('build');
+    gulp.start('debug');
     connect.server({
         livereload: true,
         root: './dist',
