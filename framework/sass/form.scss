@@ -12,7 +12,6 @@ input[type="email"]{
     width: 100%;
     -webkit-appearance: none;
     appearance: none;
-    margin-top: px2rem(7px);
     &:-ms-input-placeholder {
         color: #eee !important;
         font-size: px2rem(map_get($map-font-size, s));

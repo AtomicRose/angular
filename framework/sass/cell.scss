@@ -1,4 +1,4 @@
-$cell-height: 44px;
+$cell-height: 48px;
 .cell-group{
     width: 100%;
     border-width: 1px 0 1px 0;
@@ -18,6 +18,13 @@ $cell-height: 44px;
         flex-direction: row;
         &:last-child{
             border-bottom: none;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="email"]{
+            margin-top: px2rem(9px);
         }
     }
     .left-box {
