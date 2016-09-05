@@ -1,11 +1,12 @@
-app.controller('StyleCtrl', ['$scope','$rootScope','$state', function ($scope,$rootScope,$state) {
+app.controller('Style.FormCtrl', ['$scope','$rootScope','$state', function ($scope,$rootScope,$state) {
     window.headerConfig={
         enableHeader: true,
-        enableBack: false,
-        title: '样式说明'
+        enableBack: true,
+        enableRefresh: true,
+        title: '表单样式'
     };
     window.footerConfig = {
-        enableFooter: true
+        enableFooter: false
     };
     $rootScope.$broadcast('setHeaderConfig', window.headerConfig);
     $rootScope.$broadcast('setFooterConfig', window.footerConfig);
