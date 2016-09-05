@@ -1,10 +1,60 @@
 <div ng-controller="DialogCtrl">
-    This is the doc dialog page.
-    <ul>
-	    <li><button ng-click="openAlert()">Alert</button></li>
-	    <li><button ng-click="openSpinner()">Spinner</button></li>
-	    <li><button ng-click="openConfirm()">Confirm</button></li>
-	    <li><button ng-click="openMessage()">Message</button></li>
-	    <li><button ng-click="openToast()">Toast</button></li>
-    </ul>
+
+    <div class="cell-group">
+        <div class="cell" ng-click="openAlert()">
+            <div class="left-box clearly-width">
+                <span class="label">Alert</span>
+            </div>
+            <div class="middle-box">
+                <span class="content"></span>
+            </div>
+            <div class="right-box">
+                <span class="arrow-right"></span>
+            </div>
+        </div>
+        <div class="cell" ng-click="openSpinner()">
+            <div class="left-box clearly-width">
+                <span class="label">Spinner</span>
+            </div>
+            <div class="middle-box">
+                <span class="content"></span>
+            </div>
+            <div class="right-box">
+                <span class="arrow-right"></span>
+            </div>
+        </div>
+        <div class="cell" ng-click="openConfirm()">
+            <div class="left-box clearly-width">
+                <span class="label">Confirm</span>
+            </div>
+            <div class="middle-box">
+                <span class="content"></span>
+            </div>
+            <div class="right-box">
+                <span class="arrow-right"></span>
+            </div>
+        </div>
+        <div class="cell" ng-click="openMessage()">
+            <div class="left-box clearly-width">
+                <span class="label">Message</span>
+            </div>
+            <div class="middle-box">
+                <span class="content"></span>
+            </div>
+            <div class="right-box">
+                <span class="arrow-right"></span>
+            </div>
+        </div>
+        <div class="cell" ng-click="openToast()">
+            <div class="left-box clearly-width">
+                <span class="label">Toast</span>
+            </div>
+            <div class="middle-box">
+                <span class="content"></span>
+            </div>
+            <div class="right-box">
+                <span class="arrow-right"></span>
+            </div>
+        </div>
+    </div>
 </div>

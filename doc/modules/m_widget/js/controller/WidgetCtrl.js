@@ -10,7 +10,7 @@ app.controller('WidgetCtrl', ['$scope','$rootScope', '$state', function ($scope,
     $rootScope.$broadcast('setHeaderConfig', window.headerConfig);
     $rootScope.$broadcast('setFooterConfig', window.footerConfig);
 
-    $scope.goDialog = function() {
-        $state.go('doc.dialog');
+    $scope.goDialog = function(url) {
+        $state.go(url);
     }
 }]);

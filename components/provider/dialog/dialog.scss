@@ -1,8 +1,9 @@
-$brand-info: #999;
-$title-font-size: map-get($map-font-size, l);
-$base-font-size: map-get($map-font-size, m);
+$brand-info: $color-primary;
+$title-font-size: map_get($map-font-size, l);
+$base-font-size: map_get($map-font-size, m);
 
 .pop-mask{
+    color:$color-primary;
     position: absolute;
     top: 0;
     left: 0;
@@ -121,7 +122,7 @@ $base-font-size: map-get($map-font-size, m);
             color: #ffffff;
             text-align: center;
             padding-top: px2rem(15px);
-            font-size: px2rem(24px);
+            font-size: px2rem($base-font-size);
         }
     }
     @-webkit-keyframes spin-loading {
