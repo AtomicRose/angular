@@ -1,33 +1,12 @@
-app.controller('LayoutCtrl', ['$scope','$rootScope',function ($scope, $rootScope) {
-    if(!window.headerConfig){
+app.controller('LayoutCtrl', ['$scope', '$rootScope', 'StorageConfig', '$state', 'CMSDataConfig', function ($scope, $rootScope, StorageConfig, $state, CMSDataConfig) {
+    if (!window.headerConfig) {
         window.headerConfig = {};
     }
-    if(!window.footerConfig){
+    if (!window.footerConfig) {
         window.footerConfig = {};
     }
 
-    $scope.menuList =[
-        {
-            text: '首页',
-            class: 'icon-home',
-            route: 'layout.home'
-        },
-        {
-            text: '医院',
-            class: 'icon-hospital',
-            route: 'layout.hospital'
-        },
-        {
-            text: '发现',
-            class: 'icon-find',
-            route: 'layout.find'
-        },
-        {
-            text: '个人',
-            class: 'icon-me',
-            route: 'layout.me'
-        }
-    ];
+    $scope.menuList = CMSDataConfig.appMenus;
 
     $scope.orderListOptions = {
         //snap: 'li',

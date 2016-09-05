@@ -10,6 +10,7 @@
     .layout-header{
         width: 100%;
         height:px2rem($header-height);
+        overflow: hidden;
     }
     .layout-content{
         -webkit-box-flex: 1;
@@ -17,10 +18,11 @@
         flex: 1;
         width: 100%;
         overflow-x: hidden;
-        overflow-y: scroll;
+        overflow-y: auto;
     }
     .layout-footer{
         width: 100%;
         height: px2rem($footer-height);
+        overflow: hidden;
     }
 }

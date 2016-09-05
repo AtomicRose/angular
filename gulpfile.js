@@ -22,7 +22,6 @@ var frameworkPaths = {
     jsPath: [
         'framework/js/lib/angular.js',
         'framework/js/lib/angular-ui-router.js',
-        'framework/js/lib/ocLazyLoad.js',
         'framework/js/baseApp.js',
         'framework/js/provider/**/*.js'
     ],
@@ -253,7 +252,7 @@ gulp.task('fileWatch', ['debug'], function () {
 });
 
 gulp.task('serve', function () {
-    gulp.start('debug');
+    gulp.start('build');
     connect.server({
         livereload: true,
         root: './dist',

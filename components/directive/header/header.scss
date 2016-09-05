@@ -9,22 +9,22 @@
     flex-direction: row;
     .left-operate {
         height: 100%;
-        min-width: px2rem(40px);
+        width: px2rem(80px);
     }
     .right-operate {
         height: 100%;
-        min-width: px2rem(40px);
+        width: px2rem(80px);
     }
     .title {
         -webkit-box-flex: 1;
         -webkit-flex: 1;
         flex: 1;
+        padding: 0 px2rem(10px) 0 px2rem(10px);
         height: 100%;
         text-align: center;
-        line-height: $header-height;
+        line-height: px2rem($header-height);
         color: $header-color;
         font-size: map_get($map-font-size, m);
-        font-weight: bold;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
@@ -43,7 +43,7 @@
             left: 50%;
             top: 50%;
             margin-left: px2rem(-5px);
-            margin-top: px2rem(-7px);
+            margin-top: px2rem(-8px);
         }
     }
     .btn-refresh{
@@ -53,5 +53,14 @@
         background: url("http://static.mingyizhudao.com/146975853464574") center center no-repeat;
         -webkit-background-size:60%;
         background-size: 60%;
+        float: right;
+    }
+    .other-right-operate{
+        height: 100%;
+        line-height:px2rem($header-height);
+        color: $header-color;
+        font-size: px2rem(map_get($map-font-size, m));
+        text-align: right;
+        padding-right: px2rem(10px);
     }
 }
