@@ -16,6 +16,7 @@ app.directive('headerWidget', [function () {
             title: '名医主刀'
         };
         $scope.defaults = angular.extend(defaults, window.headerConfig);
+        document.title = $scope.defaults.title;
         /**
          * This is the $broadcast method for setting headerConfig. So you can use it in controller files like this:
          * -----------------------------------------------------
@@ -26,6 +27,7 @@ app.directive('headerWidget', [function () {
         $rootScope.$on('setHeaderConfig', function (event, data) {
             var temp = angular.copy(defaults);
             $scope.defaults = angular.extend(temp, data);
+            document.title = $scope.defaults.title;
         });
 
         /**

@@ -19,6 +19,10 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
             url: '/style/form',
             templateUrl: 'doc/modules/m_style/view/form.html'
         })
+        .state('doc.style-logo', {
+            url: '/style/logo',
+            templateUrl: 'doc/modules/m_style/view/logo.html'
+        })
         .state('doc.widget', {
             url: '/widget',
             templateUrl: 'doc/modules/m_widget/view/index.html'
