@@ -1,4 +1,4 @@
-app.controller('HomeCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+app.controller('HomeCtrl', ['$scope', '$rootScope', '$state', function ($scope, $rootScope, $state) {
     window.headerConfig = {
         enableHeader: false
     };
@@ -7,4 +7,8 @@ app.controller('HomeCtrl', ['$scope', '$rootScope', function ($scope, $rootScope
     };
     $rootScope.$broadcast('setHeaderConfig', window.headerConfig);
     $rootScope.$broadcast('setFooterConfig', window.footerConfig);
+
+    $scope.routerGo = function(url){
+    	$state.go(url);
+    }
 }]);
