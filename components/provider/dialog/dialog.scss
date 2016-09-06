@@ -99,9 +99,16 @@ $base-font-size: map_get($map-font-size, s);
         top: 50%;
         left: 50%;
         margin: px2multi(-$spinner-body-width/2, 0px, 0px, -$spinner-body-width/2);
-        background: rgba(0,0,0,.9);
+        background: rgba(50,50,50,.9);
         border-radius: px2rem(6px);
         z-index: 99999;
+        .logo-box{
+            width: px2rem(48px);
+            height: px2rem(48px);
+            position: relative;
+            margin-left: (px2rem($spinner-body-width) - px2rem(48px)) / 2;
+            margin-top: px2rem(10px);
+        }
         .spinner {
             -webkit-animation: spin-loading 1.58s linear infinite;
             -moz-animation: spin-loading 1.58s linear infinite;
