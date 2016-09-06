@@ -1,8 +1,7 @@
 var logger = require("../helpers/log");
 var exception = require("../helpers/exception");
 var p1 = require('../controllers/p1');
-var matchMock = require('../controllers/matchMock.js');
-var weChatMock = require('../controllers/weChatMock.js');
+var login = require('../controllers/m_login/login.js');
 
 var _app = null;
 /// error handlers
@@ -51,8 +50,7 @@ module.exports = {
         });
         //
         _app.use('/', p1);
-        _app.use('/', matchMock);
-        _app.use('/', weChatMock);
+        _app.use('/', login);
         /// catch 404 and forward to error handler
         // _app.use(errorHandler404);
 

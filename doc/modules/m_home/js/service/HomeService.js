@@ -7,7 +7,7 @@ app.service('HomeService',['BaseHttpRequest',function(BaseHttpRequest){
             var requestObj = {
                 url: 'http://m.mingyizhudao.com/api/hospital',
                 params: params
-            }
+            };
             return BaseHttpRequest.get(requestObj, testDto);
         }
     };

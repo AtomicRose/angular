@@ -36,7 +36,7 @@ $base-font-size: map_get($map-font-size, s);
     }
     /*confirm, alert*/
     .dialog-body {
-        $dialog-body-width: 240px;
+        $dialog-body-width: 260px;
         width: px2rem($dialog-body-width);
         position: absolute;
         top: 40%;

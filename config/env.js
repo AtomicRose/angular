@@ -19,18 +19,18 @@
         },
         release: {
             env:'release',
-            api_url: 'http://m.mingyizhudao.com'
+            api_url: 'http://wap.dev.mingyizd.com'
         },
         dev: {
             env:'dev',
-            api_url: 'http://192.168.2.178:8081'
+            api_url: 'http://192.168.11.173/dev'
         },
         localhost: {
             env:'localhost',
             api_url: 'http://localhost:20000'
         }
     };
-    var envs = allEnvs.release;//默认连接dev开发环境
+    var envs = allEnvs.localhost;//默认连接dev开发环境
     switch (window.location.host) {
         case 'm.mingyizhudao.com':
         {
@@ -41,10 +41,6 @@
         {
             envs = allEnvs.localhost;
             break;
-        }
-        default :
-        {
-            envs = allEnvs.release;
         }
     }
     return envs;

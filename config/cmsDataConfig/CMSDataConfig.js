@@ -26,7 +26,9 @@ app.factory('CMSDataConfig', ['StorageConfig', '$state', function (StorageConfig
             url: '/layout/me',
             beforeCall: function () {
                 if (!StorageConfig.TOKEN_STORAGE.getItem('authorization')) {
-                    $state.go('layout.login');
+                    $state.go('layout.login',{
+                        redirectRoute: encodeURIComponent('layout.me')
+                    });
                     return false;
                 }
                 return true;
