@@ -29,7 +29,7 @@ app.factory('dialog', ['ngDialog', function (ngDialog) {
                                     <button type="button" class="btn btn-lg border-right" ng-click="closeByCancelButton(\'REPLACEDIALOGID\')">' + cancelButtonText + '</button>\
                                 </div>\
                                 <div class="btn-right">\
-                                    <button type="button" class="btn btn-lg" ng-click="closeByOkButton(\'REPLACEDIALOGID\')"">' + okButtonText + '</button>\
+                                    <button type="button" class="btn btn-lg" ng-click="closeByOkButton(\'REPLACEDIALOGID\')">' + okButtonText + '</button>\
                                 </div>\
                             </div>\
                         </div>\
@@ -72,6 +72,9 @@ app.factory('dialog', ['ngDialog', function (ngDialog) {
                 contentHtml: '<div class="spinner-body">\
                     <div class="spinner"></div>\
                     <div class="spinner-tip">' + spinnerTip + '</div>\
+                    <div class="spinner-close" ng-click="closeByCancelButton(\'REPLACEDIALOGID\')">\
+                        <span class="circle-close"></span>\
+                    </div>\
                 </div>'
             };
             angular.extend(options, (opts || {}));
