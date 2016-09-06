@@ -10,7 +10,7 @@ app.controller('DialogCtrl', ['$scope', '$rootScope', 'dialog', function ($scope
     $rootScope.$broadcast('setHeaderConfig', window.headerConfig);
     $rootScope.$broadcast('setFooterConfig', window.footerConfig);
     
-    console.log(dialog);
+    
 
     $scope.openAlert = function (){
         var _alert = dialog.alert('我是alert');

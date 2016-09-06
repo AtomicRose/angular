@@ -1,6 +1,15 @@
 <div ng-controller="WidgetCtrl">
-    This is the doc widget page.
-    <ul>
-    	<li ng-click="goDialog()">Dialog</li>
-    </ul>
+    <div class="cell-group">
+        <div class="cell" ng-click="goDialog('doc.dialog')">
+            <div class="left-box clearly-width">
+                <span class="label">Dialog</span>
+            </div>
+            <div class="middle-box">
+                <span class="content"></span>
+            </div>
+            <div class="right-box">
+                <span class="arrow-right"></span>
+            </div>
+        </div>
+    </div>
 </div>
