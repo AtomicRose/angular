@@ -3,6 +3,9 @@ app.service('LoginService',['BaseHttpRequest',function(BaseHttpRequest){
     function passwordLoginDto(res){
         return res;
     }
+    function codeLoginDto(res){
+        return res;
+    }
 
     var service = {
         passwordLogin: function(params){
@@ -11,6 +14,13 @@ app.service('LoginService',['BaseHttpRequest',function(BaseHttpRequest){
                 data: params
             };
             return BaseHttpRequest.post(requestObj, passwordLoginDto);
+        },
+        codeLogin: function(params){
+            var requestObj = {
+                url: apiUrl + '/apiwap/codelogin',
+                data: params
+            };
+            return BaseHttpRequest.post(requestObj, codeLoginDto);
         }
     };
     return service;

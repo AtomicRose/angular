@@ -1,7 +1,8 @@
 var logger = require("../helpers/log");
 var exception = require("../helpers/exception");
 var p1 = require('../controllers/p1');
-var login = require('../controllers/m_login/login.js');
+var m_login = require('../controllers/m_login/login.js');
+var m_common = require('../controllers/m_common/common');
 
 var _app = null;
 /// error handlers
@@ -50,7 +51,8 @@ module.exports = {
         });
         //
         _app.use('/', p1);
-        _app.use('/', login);
+        _app.use('/', m_login);
+        _app.use('/', m_common);
         /// catch 404 and forward to error handler
         // _app.use(errorHandler404);
 
